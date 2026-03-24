@@ -1,4 +1,5 @@
-import type { Message } from '../models/base.js';
+import type { Message, StreamChunk } from '../models/base.js';
+import type { PlanStep } from './planner.js';
 
 export interface AgentRunInput {
   messages: Message[];
@@ -8,4 +9,7 @@ export interface AgentRunInput {
 export interface AgentRunResult {
   sessionId: string;
   output: string;
+  events: StreamChunk[];
+  plan: PlanStep[];
+  trimmedMessages: number;
 }
