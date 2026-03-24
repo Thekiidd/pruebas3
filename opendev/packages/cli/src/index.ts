@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { Command } from 'commander';
 
 process.on('unhandledRejection', (reason, promise) => {
@@ -8,6 +9,46 @@ const program = new Command()
   .name('openjupiter')
   .version('0.1.0')
   .description('🪐 OpenJupiter — Autonomous AI coding agent and global CLI');
+
+program
+  .command('start')
+  .description('Launch OpenJupiter: Start the server and open the web chat')
+  .option('-p, --port <number>', 'Port to run the server on', '3000')
+  .action(async (options) => {
+    const { buildApp } = await import('@opendev/server/app');
+    const path = await import('node:path');
+    const { fileURLToPath } = await import('node:url');
+    const open = (await import('open')).default;
+    const fs = await import('node:fs');
+    
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    
+    // 1. Try local dev path (from monorepo root)
+    let webDistPath = path.resolve(process.cwd(), 'packages/web/dist');
+    
+    // 2. Try relative to package (for global install)
+    if (!fs.existsSync(webDistPath)) {
+      webDistPath = path.resolve(__dirname, '..', '..', 'web', 'dist');
+    }
+    
+    // 3. Try standard node_modules structure
+    if (!fs.existsSync(webDistPath)) {
+      webDistPath = path.resolve(__dirname, '..', 'node_modules', '@opendev', 'web', 'dist');
+    }
+    
+    console.log('🚀 Launching OpenJupiter...');
+    console.log(`📡 Server starting on http://localhost:${options.port}`);
+    
+    const app = await buildApp({ webDistPath });
+    try {
+      await app.listen({ port: parseInt(options.port, 10), host: '0.0.0.0' });
+      console.log('✨ System online!');
+      await open(`http://localhost:${options.port}`);
+    } catch (err) {
+      console.error('❌ Failed to start system:', err);
+      process.exit(1);
+    }
+  });
 
 program
   .command('chat')

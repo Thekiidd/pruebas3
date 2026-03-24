@@ -2,8 +2,15 @@ import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import websocket from '@fastify/websocket';
 import rateLimit from '@fastify/rate-limit';
+import fastStatic from '@fastify/static';
+import path from 'node:path';
+import fs from 'node:fs';
 
-export async function buildApp() {
+export interface AppOptions {
+  webDistPath?: string;
+}
+
+export async function buildApp(options: AppOptions = {}) {
   const app = Fastify({
     logger: {
       level: process.env['LOG_LEVEL'] ?? 'info',
@@ -13,6 +20,19 @@ export async function buildApp() {
   await app.register(cors, { origin: true });
   await app.register(websocket);
   await app.register(rateLimit, { max: 100, timeWindow: '1 minute' });
+
+  // Static files for the web interface
+  if (options.webDistPath && fs.existsSync(options.webDistPath)) {
+    await app.register(fastStatic, {
+      root: options.webDistPath,
+      prefix: '/',
+    });
+
+    // Handle SPA routing
+    app.setNotFoundHandler((_req, reply) => {
+      (reply as any).sendFile('index.html');
+    });
+  }
 
   // Health check
   app.get('/health', async () => ({
