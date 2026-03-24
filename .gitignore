@@ -11,3 +11,5 @@ vite.config.ts.timestamp-*
 *.mjs
 *.mjs.ts
 .DS_Store
+coverage/
+.cache/
