@@ -27,3 +27,14 @@ pnpm install
 pnpm test
 pnpm dev
 ```
+
+## Web y GitHub Pages
+
+Si en GitHub Pages no se veía nada era porque no existía aún `packages/web` ni workflow de despliegue.
+
+Ahora ya están:
+
+- `packages/web` (React + Vite)
+- `.github/workflows/pages.yml` para build y deploy automático en `main`
+
+> Para que publique correctamente, en GitHub ve a **Settings → Pages → Source: GitHub Actions**.

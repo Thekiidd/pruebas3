@@ -7,7 +7,8 @@
     "test": "turbo run test",
     "lint": "turbo run lint",
     "clean": "turbo run clean",
-    "cli": "pnpm --filter @opendev/cli run dev"
+    "cli": "pnpm --filter @opendev/cli run dev",
+    "web": "pnpm --filter @opendev/web dev"
   },
   "devDependencies": {
     "turbo": "latest",
