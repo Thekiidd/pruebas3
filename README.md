@@ -38,3 +38,11 @@ Ahora ya están:
 - `.github/workflows/pages.yml` para build y deploy automático en `main`
 
 > Para que publique correctamente, en GitHub ve a **Settings → Pages → Source: GitHub Actions**.
+
+
+### Troubleshooting Pages (si te abre README/repo)
+
+- Verifica que estés abriendo la URL de Pages y no la del repo:
+  - `https://<tu-usuario>.github.io/<tu-repo>/`
+- En este proyecto, el `base` de Vite se calcula automáticamente usando `GITHUB_REPOSITORY`, evitando rutas hardcodeadas incorrectas.
+- El workflow también publica `.nojekyll` para evitar problemas de serving en Pages.

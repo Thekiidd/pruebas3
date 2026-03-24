@@ -27,7 +27,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile=false
       - name: Build web
+        env:
+          GITHUB_ACTIONS: "true"
+          GITHUB_REPOSITORY: ${{ github.repository }}
         run: pnpm --filter @opendev/web build
+      - name: Ensure .nojekyll
+        run: touch packages/web/dist/.nojekyll
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
