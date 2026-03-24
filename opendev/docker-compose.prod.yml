@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  server:
+    image: opendev-server:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - db-data:/data
+    depends_on:
+      - chromadb
+
+  web:
+    image: opendev-web:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - server
+
+  chromadb:
+    image: chromadb/chroma:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma-data:/chroma/chroma
+
+volumes:
+  db-data:
+  chroma-data:

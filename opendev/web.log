@@ -1,0 +1,18 @@
+
+> @opendev/web@0.1.0 build C:\Users\Sistemas\pruebas\pruebas3\opendev\packages\web
+> vite build
+
+[36mvite v5.4.21 [32mbuilding for production...[36m[39m
+transforming...
+[32m✓[39m 68 modules transformed.
+[31mx[39m Build failed in 340ms
+[31merror during build:
+[31mCould not resolve "../stores/agent.store" from "src/components/sidebar/Sidebar.tsx"[31m
+file: [36mC:/Users/Sistemas/pruebas/pruebas3/opendev/packages/web/src/components/sidebar/Sidebar.tsx[31m
+    at getRollupError (file:///C:/Users/Sistemas/pruebas/pruebas3/opendev/node_modules/.pnpm/rollup@4.60.0/node_modules/rollup/dist/es/shared/parseAst.js:406:41)
+    at error (file:///C:/Users/Sistemas/pruebas/pruebas3/opendev/node_modules/.pnpm/rollup@4.60.0/node_modules/rollup/dist/es/shared/parseAst.js:402:42)
+    at ModuleLoader.handleInvalidResolvedId (file:///C:/Users/Sistemas/pruebas/pruebas3/opendev/node_modules/.pnpm/rollup@4.60.0/node_modules/rollup/dist/es/shared/node-entry.js:21765:24)
+    at file:///C:/Users/Sistemas/pruebas/pruebas3/opendev/node_modules/.pnpm/rollup@4.60.0/node_modules/rollup/dist/es/shared/node-entry.js:21725:26[39m
+C:\Users\Sistemas\pruebas\pruebas3\opendev\packages\web:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @opendev/web@0.1.0 build: `vite build`
+Exit status 1

@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.env
+*.db
+*.sqlite
+.turbo/
+.openjupiter/
+.opendev/
+build_web_error.log
+vite.config.ts.timestamp-*
+*.mjs
+*.mjs.ts
+.DS_Store

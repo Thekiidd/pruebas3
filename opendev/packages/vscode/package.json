@@ -1,0 +1,61 @@
+{
+  "name": "opendev-vscode",
+  "displayName": "OpenDev AI Assistant",
+  "description": "OpenDev absolute coding agent integration for VS Code",
+  "version": "0.1.0",
+  "publisher": "opendev",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Machine Learning",
+    "Programming Languages"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "opendev.openChat",
+        "title": "OpenDev: Open Chat"
+      },
+      {
+        "command": "opendev.explainCode",
+        "title": "OpenDev: Explain Selected Code"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "opendev-sidebar",
+          "title": "OpenDev",
+          "icon": "$(hubot)"
+        }
+      ]
+    },
+    "views": {
+      "opendev-sidebar": [
+        {
+          "type": "webview",
+          "id": "opendev.chatView",
+          "name": "Chat"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run package",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node",
+    "test": "node ./dist/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.90.0",
+    "@types/node": "20.x",
+    "typescript": "^5.4.5",
+    "esbuild": "^0.21.5"
+  },
+  "dependencies": {
+    "@opendev/core": "workspace:*"
+  }
+}
